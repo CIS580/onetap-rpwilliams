@@ -1,5 +1,23 @@
 "use strict;"
 
+import {Game} from './game';
+import {render, update} from './player'
+
+var canvas = document.getElementById('screen');
+var game = new Game(canvas, update, render);
+
+var background = new Image();
+background.src. = '/assets/Menu.png';
+
+var oldTime;
+var paused;
+var render;
+var update;
+
+
+
+var backBuffer, backCtx, frontBuffer, frontCtx;
+
 export class Game {
 
   /**
@@ -22,8 +40,8 @@ export class Game {
     this.backCtx = this.backBuffer.getContext('2d');
 
     // Start the game loop
-    this.oldTime = performance.now();
-    this.paused = false;
+    oldTime = performance.now();
+    paused = false;
     window.requestAnimationFrame(this.loop);
   }
 
@@ -32,8 +50,8 @@ export class Game {
    * Pause or unpause the game
    * @param {bool} pause true to pause, false to start
    */
-  pause(flag) {
-    this.paused = (flag == true);
+  export function pause(flag) {
+    paused = (flag == true);
   }
 
   /**
@@ -42,8 +60,8 @@ export class Game {
    * @param{time} the current time as a DOMHighResTimeStamp
    */
   loop(newTime) {
-    var elapsedTime = newTime - this.oldTime;
-    this.oldTime = newTime;
+    var elapsedTime = newTime - oldTime;
+    oldTime = newTime;
 
     if(!this.paused) this.update(elapsedTime);
     this.render(elapsedTime, this.frontCtx);

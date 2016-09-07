@@ -2,9 +2,12 @@
 'use strict';
 "use strict;";
 
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -83,10 +86,7 @@ var Game = exports.Game = function () {
 "use strict;";
 //const Game = require('./game.js');
 
-var _game = require('./game');
 
-var canvas = document.getElementById('screen');
-var game = new _game.Game(canvas, update, render);
 
 /**
  * @function update
@@ -110,6 +110,7 @@ function update(elapsedTime) {}
 function render(elapsedTime, ctx) {
 
   // TODO: Draw the game objects using the supplied context
+  if(background) ctx.drawImage(background, 0, 0);
 
 }
 
